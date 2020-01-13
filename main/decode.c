@@ -239,10 +239,8 @@ void demodulator(tcb_t *tp, uint16_t adc)
 	    dif *= dif;
 	    tp->cdt = (tp->cdt * (AVERAGE_N - 1) + dif) / AVERAGE_N;
 	    //gpio_set_level(GPIO_NUM_14, !(tp->cdt > CDT_THRESHOLD)); // 0: LED ON
-	    if (tp->port == 0) {
-	    if (tp->cdt > CDT_THRESHOLD0) gpio_set_level(GPIO_NUM_14, 0); // ON
-	    else if (tp->cdt <= CDT_THRESHOLD1) gpio_set_level(GPIO_NUM_14, 1); // off
-	    }
+	    if (tp->cdt > CDT_THRESHOLD0) gpio_set_level((tp->port == 0) ? GPIO_NUM_14 : GPIO_NUM_19, 0); // ON
+	    else if (tp->cdt <= CDT_THRESHOLD1) gpio_set_level((tp->port == 0) ? GPIO_NUM_14 : GPIO_NUM_19, 1); // OFF
 	// caluculate average value
 	tp->avg = (tp->avg * (AVERAGE_N - 1) + adc) / AVERAGE_N;
 #if 0

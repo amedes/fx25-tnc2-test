@@ -1,3 +1,4 @@
+#ifdef CONFIG_WIFI_EABLE
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -241,7 +242,7 @@ static void wifi_task(void *p)
     }
 }
 
-#ifndef CONFIG_WIFI_SOFTAP
+#if defined(CONFIG_WIFI_ENABLE) && !defnded(CONFIG_WIFI_SOFTAP)
 static void wifi_init_sta(void)
 {
     //Initialize NVS
@@ -289,6 +290,8 @@ static void wifi_init_sta(void)
 void wifi_start(void)
 {
     esp_log_level_set(TAG, ESP_LOG_WARN);
+
+#ifdef CONFIG_WIFI_EABLR
 #ifndef CONFIG_WIFI_SOFTAP
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
@@ -296,6 +299,8 @@ void wifi_start(void)
     ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
     softap_init();
 #endif
+#endif
 
     xTaskCreate(wifi_task, "wifi_task", 4096, NULL, tskIDLE_PRIORITY, NULL);
 }
+#endif
