@@ -1,0 +1,67 @@
+menu "ESP KISS TNC Configuration"
+
+config KISS_TXDELAY
+    int "TXDELAY default value"
+    range 0 255
+    default 50
+    help
+	Transmitter keyup delay in 10ms units.
+	The default start-up value is 50 (i.e., 500ms).
+
+config KISS_P
+    int "Persistence parameter default value"
+    range 0 255
+    default 63
+    help
+	The persistence parameter, p, scaled to the range 0 - 255 with
+	the following formula:
+	P = p * 256 - 1.
+	The default value is P = 63 (i.e., p = 0.25).
+
+config KISS_SLOTTIME
+    int "Slot time default value"
+    range 0 255
+    default 10
+    help
+	The slot interval in 10 ms units.
+	The default is 10 (i.e., 100ms).
+
+config KISS_FULLDUPLEX
+    bool "Full duplex"
+    default n
+    help
+	The default is half duplex.
+    
+config WIFI_ENABLE
+    bool "Enable WiFi"
+    default n
+    help
+	Connect AP if this value is y.
+
+config WIFI_SSID
+    string "WiFi SSID"
+    depends on WIFI_ENABLE
+    default "myssid"
+    help
+	SSID (network name) for the example to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    depends on WIFI_ENABLE
+    default "mypassword"
+    help
+	WiFi password (WPA or WPA2) for the example to use.
+
+config KISS_TCPIP_PORT
+    int "TCP port number for waiting connection"
+    depends on ESP_WIFI_ENABLE
+    default 8000
+
+config WIFI_SOFTAP
+    bool "Enable Access Point mode"
+    depends on WIFI_ENABLE
+    default n
+    help
+	TNC become Wi-Fi Access Point.
+
+endmenu

@@ -1,0 +1,13 @@
+idf_component_register(SRCS "main.c"
+	"bell202.c"
+#	"i2s_adc_dac.c"
+	"i2s.c"
+	"decode.c"
+	"uart.c"
+	"cw.c"
+	"encode.c"
+	"packet_table.c"
+	"wifi.c"
+	"softap.c"
+	"gpio.c"
+                    INCLUDE_DIRS "")
