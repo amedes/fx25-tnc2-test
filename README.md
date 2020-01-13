@@ -1,5 +1,5 @@
-# Hello World Example
+# test program for FX.25 KISS TNC2
 
-Starts a FreeRTOS task to print "Hello World"
+Send AX.25 packet and receive AX.25 packet simultaneously.
 
-See the README.md file in the upper level 'examples' directory for more information about examples.
+Blink STA led every one second.
